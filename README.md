@@ -88,7 +88,7 @@
 >```java
 >@Override
 >protected void finalize() throws Throwable {
->super.finalize();
+>	super.finalize();
 >//添加自己的实现
 >}
 >```
@@ -101,13 +101,13 @@
 > 1. 尽量避免在循环和频繁调用的方法中创建对象；  
 > 2. 合理利用对象池。  
 
-自定义对象复用池(享元模式)
+自定义对象复用池
 
-> 1. 怎么设计 ?
-> Handler: 单链表设计对象池
->     ​	-->方便，不需要关心对象的差异；
-> Glide: Bitmap复用池，map集合（LruCache --> map）
-> ​	  -->享元模式，对象每个都不同，不能替代（内存必须足够map<size,bitmap> 100字节 --1000字节）
+> 1. 怎么设计 ?  
+> Handler: 单链表设计对象池  
+>     	-->方便，不需要关心对象的差异；  
+> Glide: Bitmap复用池(享元模式)，map集合（LruCache --> map）  
+> 	  -->享元模式，对象每个都不同，不能替代（内存必须足够map<size,bitmap> 100字节 --1000字节）  
 > 2. 怎么使用
 
 ## 三、内存泄漏（`OOM`）
@@ -138,7 +138,7 @@ Tips：在`Android`中软引用和弱引用都不可靠，可能表现一致（�
 #### 3.2.1 强引用
 
 ```java
-Object object =new Object();
+Object object = new Object();
 ```
 
 #### 3.2.2 软引用
