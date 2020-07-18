@@ -89,7 +89,7 @@
 >@Override
 >protected void finalize() throws Throwable {
 >	super.finalize();
->//添加自己的实现
+>	//添加自己的实现
 >}
 >```
 >
@@ -128,7 +128,7 @@
 
 应用场景（`Java`）：
 
-> 软应用：内存是在不足时gc时才回收；
+> 软应用：内存是在不足时gc时才回收；  
 > 弱引用：希望对象不用了就及时回收（只要gc就被回收）。
 
 Tips：在`Android`中软引用和弱引用都不可靠，可能表现一致（只要gc就回收）。  
