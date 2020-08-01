@@ -137,6 +137,8 @@ Tips：在`Android`中软引用和弱引用都不可靠，可能表现一致（�
 
 #### 3.2.1 强引用
 
+`new`出来的对象，当内存不足时，`JVM`宁可出现`OutOfMemory`错误停止也不会回收此空间，即永远不会被`GC`回收。
+
 ```java
 Object object = new Object();
 ```
@@ -161,11 +163,26 @@ WeakReference<Object> objectWeakReference = new WeakReference<>(weakObject);
 
 #### 3.2.4 虚引用
 
+幽灵、幻影引用，不对对象生命周期造成任何影响，用于跟踪`GC`的回收通知。
+
+> 功能：不会影响到对象的生命周期，但是能让程序员知道该对象什么时候被回收了。使用虚引用的目的就是为了得知对象被`GC`的时机，所以可以利用虚引用来进行销毁前的一些操作，比如说资源的释放等。这个虚引用对应对象而言完全是无感知的，有没有完全一样，但是对于虚引用的使用者而言，就像是待观察的对象的把脉线，可以通过它来观察对象是否已经被回收，从而进行相应的处理。
+
 ```java
 Object phantomObject = new Object();
 ReferenceQueue<Object> queue = new ReferenceQueue<>();
 PhantomReference<Object> objectPhantomReference = new PhantomReference<Object>(phantomObject, queue);
 ```
+
+#### 3.2.5 小结
+
+| 引用类型 | 被垃圾回收时机 | 用途           | 生命周期            |
+| -------- | -------------- | -------------- | ------------------- |
+| 强引用   | 从来不会       | 对象的一般状态 | `JVM`停止运行时终止 |
+| 软引用   | 在内存不足时   | 对象缓存       | 内存不足时终止      |
+| 弱引用   | 再垃圾回收时   | 对象缓存       | `GC`运行后终止      |
+| 虚引用   | `Unknown`      | `Unknown`      | `Unknown`           |
+
+
 
 ### 3.3 内存泄漏排查工具及使用
 
